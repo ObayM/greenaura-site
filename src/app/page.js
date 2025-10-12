@@ -1,7 +1,7 @@
 import HeroSection from "@/components/Hero";
 import PartneredByCarousel  from "@/components/Carousel";
 import { LOGOS } from "@/lib/partners-logos";
-
+import AboutUsSection from "@/components/About";
 
 export default function Home() {
   return (
@@ -19,6 +19,7 @@ export default function Home() {
         <PartneredByCarousel logos={LOGOS} speed="fast" direction="left" />
       </div>
   </div>
+    <AboutUsSection/>
     </>
   );
 }
