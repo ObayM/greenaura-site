@@ -102,7 +102,7 @@ const ActivitiesSection = () => {
     };
 
     return (
-        <section ref={ref} className="bg-[#0A1A12] py-24 sm:py-32 overflow-hidden">
+        <section ref={ref} className="bg-gradient-to-b from-lime-200 via-green-50 to-[#0A1A12] py-24 sm:py-32 overflow-hidden">
             <div className="container mx-auto px-4">
                 <motion.div
                     className="max-w-3xl mb-16 text-center md:text-left"

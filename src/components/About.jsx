@@ -85,7 +85,7 @@ const AboutUsSection = () => {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen w-full overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-lime-100/80 via-green-50 to-emerald-100/80 py-24 sm:py-32 px-4"
+            className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-lime-100/80 via-green-50 to-[#0A1A12] py-24 sm:py-32 px-4"
         >
             <div className="mx-auto max-w-4xl text-center">
                 
