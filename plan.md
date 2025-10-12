@@ -10,4 +10,6 @@ this includes
 
 i think i made the hero section and the navbar and they are pretty done well
 
-next is the about-us section and the carousel for the partners
+next is the about-us section and the carousel for the partners and i just finished it, i think it's pretty cool
+next is gonna be the about section itself, where what is greenaura and these things goes
+
