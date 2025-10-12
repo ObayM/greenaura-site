@@ -2,6 +2,8 @@ import HeroSection from "@/components/Hero";
 import PartneredByCarousel  from "@/components/Carousel";
 import { LOGOS } from "@/lib/partners-logos";
 import AboutUsSection from "@/components/About";
+import ActivitiesSection from "@/components/ActivitesSection";
+import FAQSection from "@/components/faq";
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       </div>
   </div>
     <AboutUsSection/>
+    <ActivitiesSection/>
+    <FAQSection/>
     </>
   );
 }
