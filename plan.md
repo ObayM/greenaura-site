@@ -9,3 +9,5 @@ this includes
 - fonts
 
 i think i made the hero section and the navbar and they are pretty done well
+
+next is the about-us section and the carousel for the partners
