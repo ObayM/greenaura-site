@@ -114,8 +114,8 @@ const ActivitiesSection = () => {
                         Here are a few projects we've done!
                     </motion.h2>
                     <motion.p variants={itemVariants} className="mt-4 text-lg text-green-200/70">
-                        Our ecosystem is designed to empower the next generation of climate leaders through hands-on programs, collaborative challenges, and groundbreaking research.
-                    </motion.p>
+                            Will write some text here later
+                        </motion.p>
                 </motion.div>
             </div>
 
@@ -146,4 +146,3 @@ const ActivitiesSection = () => {
 };
 
 export default ActivitiesSection;
-

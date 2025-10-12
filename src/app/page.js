@@ -4,6 +4,7 @@ import { LOGOS } from "@/lib/partners-logos";
 import AboutUsSection from "@/components/About";
 import ActivitiesSection from "@/components/ActivitesSection";
 import FAQSection from "@/components/faq";
+import Footer from "@/components/layout/footer";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
     <AboutUsSection/>
     <ActivitiesSection/>
     <FAQSection/>
+    <Footer/>
     </>
   );
 }
