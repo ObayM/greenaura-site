@@ -5,9 +5,19 @@ import AboutUsSection from "@/components/About";
 import ActivitiesSection from "@/components/ActivitesSection";
 import FAQSection from "@/components/faq";
 import JoinUsSection from "@/components/JoinUs";
-import Footer from "@/components/layout/footer";
 
-export default function Home() {
+import BlogSection from "@/components/blogSection";
+import { getPosts } from '@/lib/posts';
+
+import Footer from "@/components/layout/footer";
+import ContactUsSection from "@/components/contact-us";
+
+export default async function Home() {
+
+  const allPosts = await getPosts();
+
+  const latestPosts = allPosts.slice(0, 2);
+
   return (
     <>
     <HeroSection/>
@@ -25,8 +35,12 @@ export default function Home() {
   </div>
     <AboutUsSection/>
     <ActivitiesSection/>
-    <FAQSection/>
+    <BlogSection posts={latestPosts} />
+
     <JoinUsSection/>
+    <FAQSection/>
+
+    <ContactUsSection/>
     <Footer/>
     
 

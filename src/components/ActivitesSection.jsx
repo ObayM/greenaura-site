@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import {FaTrophy} from 'react-icons/fa';
+import {FaMicrophone, FaTrophy, FaVoicemail} from 'react-icons/fa';
 
 import VanillaTilt from 'react-vanilla-tilt';
 
@@ -13,7 +13,7 @@ const ActivityCard = ({ icon, title, description, color }) => {
     return (
         <VanillaTilt
             style={{}}
-            className="w-80 h-96 flex-shrink-0"
+            className="w-96 h-108 flex-shrink-0"
             options={{
                 max: 15,
                 speed: 400,
@@ -36,10 +36,11 @@ const ActivityCard = ({ icon, title, description, color }) => {
                 
                 <div className="relative z-10">
                     <p className="text-white/80">{description}</p>
-                    <Link href="#" className="mt-4 inline-flex items-center font-semibold text-white group-hover:underline">
-                        Learn More
-                    </Link>
+
                 </div>
+                {/* <Link href="#" className="mt-4 inline-flex items-center font-semibold text-white group-hover:underline">
+                        Learn More
+                </Link> */}
 
                  <IconComponent className="absolute bottom-0 right-0 text-white/5 text-[12rem] transform translate-x-1/4 translate-y-1/4 transition-all duration-500 group-hover:scale-110" />
             </div>
@@ -51,32 +52,32 @@ const ActivitiesSection = () => {
     const activities = [
         {
             icon: FaTrophy,
-            title: 'To be named here',
-            description: 'Description goes here',
+            title: 'EcoVerse summit & Challenge',
+            description: 'The first sustainable summit & innovation challenge of its kind in the Middle East, combining climate education, entrepreneurship, and a competition for green startups, with Mini Summits led by ambassadors in different cities.',
             color: '#166534',
         },
         {
-            icon: FaTrophy,
-            title: 'To be named here',
-            description: 'Description goes here',
+            icon: FaVoicemail,
+            title: 'Voices for the planet',
+            description: 'A digital storytelling challenge for content creators to raise climate awareness using voiceovers, short videos, podcasts, or reels.',
             color: '#ca8a04',
         },
         {
-            icon: FaTrophy,
-            title: 'To be named here',
-            description: 'Description goes here',
+            icon: FaMicrophone,
+            title: 'EcoMedia',
+            description: 'A creative contest inviting artists, designers, and visual storytellers to raise environmental awareness through photography, design, and visual arts.',
             color: '#0f766e',
         },
         {
             icon: FaTrophy,
-            title: 'To be named here',
-            description: 'Description goes here',
+            title: 'Global Leaders for Sustainability',
+            description: 'A transformative leadership program that equips passionate youth with the knowledge and skills to become impactful sustainability changemakers. Through mentorship, real-world projects and climate leadership training, participants emerge empowered to drive action within their communities and beyond.',
             color: '#84cc16',
         },
          {
             icon: FaTrophy,
-            title: 'To be named here',
-            description: 'Description goes here',
+            title: 'GreenAura Ambassadors',
+            description: 'A dynamic leadership program empowering youth to launch impactful projects, host events, and represent GreenAura in schools, universities, and local communities.',
             color: '#4f46e5',
         },
     ];
@@ -102,7 +103,9 @@ const ActivitiesSection = () => {
     };
 
     return (
-        <section ref={ref} className="bg-gradient-to-b from-lime-200 via-green-50 to-[#0A1A12] py-24 sm:py-32 overflow-hidden">
+        <section 
+        id="programs"
+        ref={ref} className="bg-gradient-to-b from-lime-200  via-emerald-100 to-lime-100 py-24 sm:py-32 overflow-hidden">
             <div className="container mx-auto px-4">
                 <motion.div
                     className="max-w-3xl mb-16 text-center md:text-left"
@@ -110,10 +113,10 @@ const ActivitiesSection = () => {
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                 >
-                    <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-white">
+                    <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-green-900">
                         Here are a few projects we've done!
                     </motion.h2>
-                    <motion.p variants={itemVariants} className="mt-4 text-lg text-green-200/70">
+                    <motion.p variants={itemVariants} className="mt-4 text-lg text-green-900/90">
                             Will write some text here later
                         </motion.p>
                 </motion.div>

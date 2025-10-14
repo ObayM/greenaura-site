@@ -1,10 +1,11 @@
 'use client';
 import React from "react";
+import { Link as ScrollLink } from 'react-scroll';
 
 
 function HeroSection() {
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div id="home" className="relative w-full h-screen overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center bg-[url('/images/hero-image.jpg')]" />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
@@ -33,13 +34,32 @@ function HeroSection() {
               <button 
                 className="font-semibold text-base w-full sm:w-auto bg-[#577323] text-[#ebebeb] px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:bg-[#475e1f] hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#dbdaa9] focus:ring-opacity-50"
               >
-                Explore Our Programs
-              </button>
+                <ScrollLink
+                  key={"programs"}
+                  to={"programs"}
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                >
+                  Explore Our Programs
+                </ScrollLink>
+                </button>
 
               <button 
                 className="font-semibold text-base w-full sm:w-auto bg-[#dbdaa9] text-[#577323] px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:bg-[#c4c48f] hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#577323] focus:ring-opacity-50"
               >
-                Join the Movement
+
+                <ScrollLink
+                  key={"join-us"}
+                  to={"join-us"}
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                >
+                  Join the Movement
+                </ScrollLink>
               </button>
             </div>
           </div>
@@ -50,3 +70,4 @@ function HeroSection() {
 }
 
 export default HeroSection;
+

@@ -17,3 +17,5 @@ the about us section is good but it's really really normal and i think it's some
 
 
 next is the activiteis/programs section, i think i did it in a pretty well way, so i gonna leave it as it's
+
+i was writiing the educators section 

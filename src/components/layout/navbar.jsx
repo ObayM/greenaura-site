@@ -19,9 +19,11 @@ const Navbar = () => {
     { to: 'about-us', label: 'About Us' },
     { to: 'programs', label: 'Programs' },
     { to: 'blog', label: 'Blog' },
-    { to: 'alumni', label: 'Alumni' },
-    { to: '/oppertunities', label: 'Oppertunities' },
-    { to: '/contact-us', label: 'Contact Us' },
+    // { to: 'alumni', label: 'Alumni' },
+    // { to: '/oppertunities', label: 'Oppertunities' },
+    { to: 'join-us', label: 'Join Us' },
+    { to: 'faq', label: 'FAQ' },
+    { to: 'contact-us', label: 'Contact Us' },
   ];
 
   const navContainerVariants = {
@@ -97,7 +99,7 @@ const Navbar = () => {
                       offset={-100}
                       duration={500}
                       className={linkClassName}
-                      activeClass="text-cyan-400 font-bold"
+                      activeClass="text-green-400 font-bold"
                     >
                       {link.label}
                       <span className="absolute bottom-[-6px] left-0 w-full h-0.5 bg-green-300 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center" />
@@ -121,7 +123,7 @@ const Navbar = () => {
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold px-5 py-2 rounded-full transition-shadow duration-300"
                 >
-                  <a href="#" target="_blank">Donate</a>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSf39Nv5dKa0UDEWECSFWEJLJO" target="_blank">Donate</a>
                 </motion.button>
               </div>
 

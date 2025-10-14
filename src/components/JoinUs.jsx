@@ -23,7 +23,7 @@ const JoinUsSection = () => {
     };
 
     return (
-        <section className="relative bg-gradient-to-b from-lime-100/60 via-green-50 to-[#0A1A12] py-32 sm:py-48 w-full flex items-center justify-center overflow-hidden">
+        <section id="join-us" className="relative bg-gradient-to-b from-green-50 via-lime-50 to-green-100 py-32 sm:py-48 w-full flex items-center justify-center overflow-hidden">
 
             <motion.div
                 className="relative z-10 text-center px-4"
@@ -50,7 +50,8 @@ const JoinUsSection = () => {
                 >
                     <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
                         <Link
-                            href="/programs"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSf39Nv5dKa0UDEWECSFWEJLJO"
+                            target="_blank"
                             className="flex items-center justify-center gap-3 w-full sm:w-auto rounded-full bg-gradient-to-r from-green-400 to-emerald-500 px-8 py-4 text-base font-semibold text-green-950 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-lime-500/40"
                         >
                             Join our community
@@ -59,7 +60,8 @@ const JoinUsSection = () => {
                     
                      <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
                         <Link
-                            href="/partner"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSf39Nv5dKa0UB_WKoMm1Iv4_laYzyoI9uzaajqtCr_P1Iifkw/viewform?usp=header"
+                            target='_blank'
                             className="flex items-center justify-center gap-3 w-full sm:w-auto rounded-full border border-green-900/20 bg-white/30 px-8 py-4 text-base font-semibold text-green-950 backdrop-blur-md transition-all duration-300 hover:border-green-900/40 hover:bg-white/50"
                         >
                             Apply as a volunteer
@@ -72,3 +74,4 @@ const JoinUsSection = () => {
 };
 
 export default JoinUsSection;
+

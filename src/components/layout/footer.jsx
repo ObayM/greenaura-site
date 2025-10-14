@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaTwitter, FaInstagram, FaLinkedin, FaGithub, FaFacebook, FaTelegram } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -27,10 +27,10 @@ const Footer = () => {
     };
 
     const socialIcons = [
-        { icon: FaTwitter, href: '#' },
-        { icon: FaInstagram, href: '#' },
-        { icon: FaLinkedin, href: '#' },
-        { icon: FaGithub, href: '#' },
+        { icon: FaFacebook, href: 'https://www.facebook.com/GreenAuraOfficial' },
+        { icon: FaInstagram, href: 'https://www.instagram.com/greenaura.eg/' },
+        { icon: FaLinkedin, href: 'https://www.linkedin.com/company/green-aura-2025' },
+        { icon: FaTelegram, href: 'https://t.me/greenaura_opportunities' },
     ];
 
     return (
@@ -73,18 +73,18 @@ const Footer = () => {
                     <motion.div variants={itemVariants}>
                         <h3 className="font-semibold mb-4 tracking-wider uppercase text-lime-400">Programs</h3>
                         <ul className="space-y-3">
-                            <li><Link href="/camps" className="text-green-200/70 hover:text-white transition-colors">EcoVerse</Link></li>
-                            <li><Link href="/competitions" className="text-green-200/70 hover:text-white transition-colors">EcoMedia</Link></li>
-                            <li><Link href="/fellowships" className="text-green-200/70 hover:text-white transition-colors">Voices For the planet</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">EcoVerse</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">EcoMedia</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">Voices For the planet</Link></li>
                         </ul>
                     </motion.div>
 
                      <motion.div variants={itemVariants}>
                         <h3 className="font-semibold mb-4 tracking-wider uppercase text-lime-400">About</h3>
                         <ul className="space-y-3">
-                            <li><Link href="/about" className="text-green-200/70 hover:text-white transition-colors">Our Story</Link></li>
-                            <li><Link href="/team" className="text-green-200/70 hover:text-white transition-colors">Team</Link></li>
-                            <li><Link href="/contact" className="text-green-200/70 hover:text-white transition-colors">Contact</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">Our Story</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">Team</Link></li>
+                            <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">Contact</Link></li>
                         </ul>
                     </motion.div>
 

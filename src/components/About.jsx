@@ -85,7 +85,8 @@ const AboutUsSection = () => {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-lime-100/80 via-green-50 to-[#0A1A12] py-24 sm:py-32 px-4"
+            id='about-us'
+            className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-lime-100/80 via-green-50 to-lime-200 py-24 sm:py-32 px-4"
         >
             <div className="mx-auto max-w-4xl text-center">
                 
@@ -119,7 +120,6 @@ const AboutUsSection = () => {
                     >
                         From humble beginnings in Egypt, GreenAura has grown into a worldwide network of changemakers building a greener tomorrow through research, entrepreneurship, and technology.
                     </motion.p>
-
                     <motion.div
                         className="my-16"
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -164,8 +164,8 @@ const AboutUsSection = () => {
                             </motion.div>
                         ))}
                     </motion.div>
-                    
-                    <motion.div variants={itemVariants} className="mt-16">
+                    {/* Commenting this for now until the about page is ready*/}
+                    {/* <motion.div variants={itemVariants} className="mt-16">
                         <motion.div
                             whileHover={{ scale: 1.05, y: -5 }}
                             whileTap={{ scale: 0.95 }}
@@ -182,7 +182,7 @@ const AboutUsSection = () => {
                                 </span>
                             </Link>
                         </motion.div>
-                    </motion.div>
+                    </motion.div> */}
 
                 </motion.div>
             </div>
@@ -191,5 +191,5 @@ const AboutUsSection = () => {
 };
 
 
-
 export default AboutUsSection;
+
