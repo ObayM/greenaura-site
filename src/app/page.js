@@ -1,25 +1,30 @@
-import HeroSection from "@/components/Hero";
+import HeroSection from "@/components/Home/Hero";
+
 import PartneredByCarousel  from "@/components/Carousel";
 import { LOGOS } from "@/lib/partners-logos";
-import AboutUsSection from "@/components/About";
-import ActivitiesSection from "@/components/ActivitesSection";
-import FAQSection from "@/components/faq";
-import JoinUsSection from "@/components/JoinUs";
+
+import AboutUsSection from "@/components/Home/About";
+import ActivitiesSection from "@/components/Home/ActivitesSection";
+import FAQSection from "@/components/Home/faq";
+import JoinUsSection from "@/components/Home/JoinUs";
 
 import BlogSection from "@/components/blogSection";
 import { getPosts } from '@/lib/posts';
 
 import Footer from "@/components/layout/footer";
-import ContactUsSection from "@/components/contact-us";
+import ContactUsSection from "@/components/Home/contact-us";
+
+import SmoothScroll from "@/components/layout/SmoothScroll";
 
 export default async function Home() {
+
 
   const allPosts = await getPosts();
 
   const latestPosts = allPosts.slice(0, 2);
 
   return (
-    <>
+    <SmoothScroll >
     <HeroSection/>
     <div className="bg-gradient-to-b from-green-50 to-lime-100/80 py-12 h-76 flex flex-col justify-between items-center">
         <h1 className="mt-4 mb-8 text-4xl font-bold text-white md:text-6xl flex justify-center items-center">
@@ -44,6 +49,6 @@ export default async function Home() {
     <Footer/>
     
 
-    </>
+    </SmoothScroll>
   );
 }
