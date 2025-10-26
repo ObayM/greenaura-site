@@ -1,32 +1,33 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import { motion, useInView } from 'framer-motion';
 
 import { useEffect, useRef } from 'react';
-import { animate } from 'framer-motion';
 
-const Counter = ({ from, to }) => {
+const Counter = ({ from = 0, to }) => {
     const nodeRef = useRef();
+    const isInView = useInView(nodeRef, { once: true, amount: 0.5 });
 
     useEffect(() => {
         const node = nodeRef.current;
+        if (isInView) {
+            const controls = animate(from, to, {
+                duration: 2,
+                ease: "easeOut",
+                onUpdate(value) {
+                    if (node) { 
+                        node.textContent = new Intl.NumberFormat().format(Math.round(value));
+                    }
+                },
+            });
+            return () => controls.stop();
+        }
+    }, [from, to, isInView]);
 
-        const controls = animate(from, to, {
-            duration: 2,
-            ease: "easeOut",
-            onUpdate(value) {
-                node.textContent = new Intl.NumberFormat().format(Math.round(value));
-            },
-        });
-
-        return () => controls.stop();
-    }, [from, to]);
-
-    return <span ref={nodeRef} />;
+    return <span ref={nodeRef}>{new Intl.NumberFormat().format(from)}</span>;
 };
 
 
@@ -135,14 +136,6 @@ const AboutUsSection = () => {
                             },
                         }}
                     >
-                        {/* <Image
-                            src="/images/about-us-image.png"
-                            alt="Illustration of a green, leafy earth"
-                            width={400}
-                            height={400}
-                            className="mx-auto drop-shadow-2xl"
-                            priority
-                        /> */}
                     </motion.div>
                     
                     <motion.div
@@ -162,10 +155,10 @@ const AboutUsSection = () => {
                                     {stat.label}
                                 </p>
                             </motion.div>
+
                         ))}
                     </motion.div>
-                    {/* Commenting this for now until the about page is ready*/}
-                    {/* <motion.div variants={itemVariants} className="mt-16">
+                    <motion.div variants={itemVariants} className="mt-16">
                         <motion.div
                             whileHover={{ scale: 1.05, y: -5 }}
                             whileTap={{ scale: 0.95 }}
@@ -182,7 +175,7 @@ const AboutUsSection = () => {
                                 </span>
                             </Link>
                         </motion.div>
-                    </motion.div> */}
+                    </motion.div>
 
                 </motion.div>
             </div>
@@ -192,4 +185,3 @@ const AboutUsSection = () => {
 
 
 export default AboutUsSection;
-
