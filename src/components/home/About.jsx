@@ -3,8 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
-import { motion, useInView } from 'framer-motion';
-
+import { motion, useInView, animate } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 const Counter = ({ from = 0, to }) => {

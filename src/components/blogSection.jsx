@@ -85,8 +85,7 @@ const BlogSection = ({ posts }) => {
                         <BlogCard key={post.slug} {...post} />
                     ))}
                 </motion.div>
-                {/* commenting this for now until the blog page is ready */}
-{/* 
+
                  <div className="text-center mt-16">
                     <motion.div
                          initial={{ opacity: 0, y: 20 }}
@@ -99,7 +98,7 @@ const BlogSection = ({ posts }) => {
                             <FaArrowRight />
                         </Link>
                     </motion.div>
-                </div> */}
+                </div>
 
             </div>
         </section>

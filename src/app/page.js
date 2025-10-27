@@ -11,7 +11,6 @@ import JoinUsSection from "@/components/Home/JoinUs";
 import BlogSection from "@/components/blogSection";
 import { getPosts } from '@/lib/posts';
 
-import Footer from "@/components/layout/footer";
 import ContactUsSection from "@/components/Home/contact-us";
 
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -46,7 +45,6 @@ export default async function Home() {
     <FAQSection/>
 
     <ContactUsSection/>
-    <Footer/>
     
 
     </SmoothScroll>

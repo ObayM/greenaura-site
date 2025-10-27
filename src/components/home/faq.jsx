@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+};
 
 const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -13,8 +21,6 @@ const itemVariants = {
     },
 };
 
-
-
 const AccordionItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,47 +29,57 @@ const AccordionItem = ({ question, answer }) => {
         open: {
             opacity: 1,
             height: 'auto',
-            marginTop: '16px',
-            transition: { duration: 0.3, ease: 'easeInOut' },
+            marginTop: '0px',
+            transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
         },
     };
 
     return (
         <motion.div
             variants={itemVariants}
-            className="border-b-2 border-green-200/50 py-6"
+            className="bg-white/60 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-green-200/50"
+            animate={{
+                backgroundColor: isOpen ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.6)',
+            }}
+            transition={{ duration: 0.3 }}
         >
-            <motion.header
-                className="flex justify-between items-center cursor-pointer"
+            <motion.button
+                className="w-full flex justify-between items-start text-left p-6 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
-                initial={false}
+                whileHover={{ backgroundColor: 'rgba(236, 253, 245, 0.7)' }}
             >
-                <h3 className="text-lg font-semibold text-green-900">{question}</h3>
-                <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <FiChevronDown className="text-2xl text-green-700" />
-                </motion.div>
-            </motion.header>
+                <h3 className="text-lg font-semibold text-emerald-800 pr-4">
+                    {question}
+                </h3>
+                <div className="flex-shrink-0 ml-4 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <motion.div
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <FiPlus className="text-2xl text-emerald-700" />
+                    </motion.div>
+                </div>
+            </motion.button>
 
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.section
                         key="content"
-                        variants={answerVariants}
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
+                        variants={answerVariants}
+                        className="overflow-hidden"
                     >
-                        <p className="text-gray-600 leading-relaxed">{answer}</p>
+                        <p className="px-6 pb-6 text-emerald-700/90 leading-relaxed">
+                            {answer}
+                        </p>
                     </motion.section>
                 )}
             </AnimatePresence>
         </motion.div>
     );
 };
-
 
 const FAQSection = () => {
     const faqData = [
@@ -109,57 +125,52 @@ const FAQSection = () => {
     },
 ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-        },
-    };
-
     return (
-        <div id="faq"  className="relative bg-gradient-to-b from-green-50 to-lime-100/60">
-            {/* wavy devider
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
-                <svg
-                    data-name="Layer 1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                    className="relative block h-[80px] w-full"
-                >
-                    <path
-                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                        className="fill-current text-lime-900" 
-                    ></path>
-                </svg>
-            </div> */}
-            
-            <motion.div
-                className="container mx-auto max-w-3xl px-4 py-32 sm:py-40"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={containerVariants}
-            >
+        <section id="faq" className="relative bg-emerald-50 py-24 sm:py-32 overflow-hidden">
+
+            <div
+                className="absolute -top-40 -right-40 w-96 h-96 bg-lime-200/50 rounded-full blur-3xl opacity-60"
+            />
+            <div
+                className="absolute top-1/2 -left-60 w-96 h-96 bg-green-200/40 rounded-full blur-3xl opacity-50"
+            />
+
+            <div className="container mx-auto max-w-5xl px-4 relative">
                 <div className="text-center">
-                    <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-green-900">
+                    <motion.h2
+                        className="text-4xl sm:text-5xl font-bold text-emerald-900 tracking-tight"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5 }}
+                    >
                         Frequently Asked Questions
                     </motion.h2>
-                    <motion.p variants={itemVariants} className="mt-4 text-lg text-gray-700">
+                    <motion.p
+                        className="mt-4 text-lg text-emerald-700 max-w-2xl mx-auto"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
                         Have questions? We have answers. If you can't find what you're looking for, feel free to contact us.
                     </motion.p>
                 </div>
 
-                <div className="mt-12">
+                <motion.div
+                    className="flex flex-col gap-6"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={containerVariants}
+                >
                     {faqData.map((faq, index) => (
                         <AccordionItem key={index} question={faq.question} answer={faq.answer} />
                     ))}
-                </div>
-            </motion.div>
-        </div>
+                </motion.div>
+            </div>
+        </section>
     );
 };
 
 export default FAQSection;
-

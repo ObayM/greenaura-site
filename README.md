@@ -10,4 +10,3 @@ This is a website for GreenAura, a global youth-led initiative building a greene
 
 then `npm install` and `npm run dev`
 
-For the magic part belive me the animations are so magical, isn't it ;)
