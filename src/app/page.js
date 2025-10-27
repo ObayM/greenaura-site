@@ -1,17 +1,17 @@
-import HeroSection from "@/components/Home/Hero";
+import HeroSection from "@/components/home/Hero";
 
 import PartneredByCarousel  from "@/components/Carousel";
 import { LOGOS } from "@/lib/partners-logos";
 
-import AboutUsSection from "@/components/Home/About";
-import ActivitiesSection from "@/components/Home/ActivitesSection";
-import FAQSection from "@/components/Home/faq";
-import JoinUsSection from "@/components/Home/JoinUs";
+import AboutUsSection from "@/components/home/About";
+import ActivitiesSection from "@/components/home/ActivitesSection";
+import FAQSection from "@/components/home/faq";
+import JoinUsSection from "@/components/home/JoinUs";
 
 import BlogSection from "@/components/blogSection";
 import { getPosts } from '@/lib/posts';
 
-import ContactUsSection from "@/components/Home/contact-us";
+import ContactUsSection from "@/components/home/contact-us";
 
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
