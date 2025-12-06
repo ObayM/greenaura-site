@@ -1,396 +1,399 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { 
-  motion, 
-  useSpring, 
-  useMotionValue, 
-  useInView,
-  AnimatePresence 
+import {
+    motion,
+    useScroll,
+    useTransform,
 } from "framer-motion";
 
-import { 
-  FiUsers, 
-  FiZap, 
-  FiHeart, 
-  FiChevronsDown, 
-  FiHeadphones, 
-  FiRepeat, 
-  FiBookOpen, 
-  FiBriefcase,
-  FiAward,
-  FiShield,
-  FiTrendingUp,
-  FiPlus,
-  FiMinus
+
+import {
+    FiUsers,
+    FiZap,
+    FiArrowRight,
+    FiTrendingUp,
 } from "react-icons/fi";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import Background from "@/components/layout/background";
-import GlassPanel from "@/components/layout/GlassPanel";
+import AnimatedStat from "./AnimatedStat";
+
 
 
 const teamMembers = [
-  {
-    name: "Alex Rivera",
-    role: "Founder & CEO",
-    image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/56205803bfb343eb6b1ead0b326e362c4610f41d_tempfileforshare_20251027-230610.jpg",
-    bio: "Ahmed founded GreenAura",
-    social: {
-      linkedin: "https://linkedin.com/in/ahmedhany",
+    {
+        name: "Alex Rivera",
+        role: "Founder & CEO",
+        image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/56205803bfb343eb6b1ead0b326e362c4610f41d_tempfileforshare_20251027-230610.jpg",
+        bio: "Visionary leader with a passion for sustainable innovation.",
+        social: {
+            linkedin: "https://linkedin.com/in/ahmedhany",
+            twitter: "#"
+        },
     },
-  },
-  {
-    name: "Obay Rashad",
-    role: "Lead Web developer",
-    image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/998e4e1028e1a861672520c02aed61bc961a080a_obay.jpg",
-    bio: "Obay is in charge of all software development at greenaura",
-    social: {
-      linkedin: "https://linkedin.com/in/obay-dev",
+    {
+        name: "Obay Rashad",
+        role: "Lead Web Developer",
+        image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/998e4e1028e1a861672520c02aed61bc961a080a_obay.jpg",
+        bio: "Crafting digital experiences that drive real-world impact.",
+        social: {
+            linkedin: "https://linkedin.com/in/obay-dev",
+            github: "#"
+        },
     },
-  },
- 
 ];
 
-const whatWeDoItems = [
-    { icon: FiHeadphones , title: "Awareness & Clean-ups", text: "Engaging campaigns and community-driven clean-up drives that make a visible difference." },
-    { icon: FiRepeat, title: "Recycling & Waste Mgmt.", text: "Implementing effective, modern recycling and waste management solutions for a circular economy." },
-    { icon: FiBookOpen, title: "Educational Programs", text: "Delivering inspiring workshops and seminars for schools, universities, and organizations." },
-    { icon: FiBriefcase, title: "Corporate Partnerships", text: "Collaborating with forward-thinking businesses and NGOs to amplify our collective impact." },
+const stats = [
+    { value: 5000, suffix: "kg", label: "Waste Collected" },
+    { value: 200, suffix: "+", label: "Trees Planted" },
+    { value: 3000, suffix: "+", label: "Lives Impacted" },
+    { value: 15, suffix: "", label: "Partner Cities" },
 ];
 
-const impactStats = [
-    { value: 5000, suffix: "Kg", label: "of waste collected" }, 
-    { value: 200, suffix: "+", label: "trees planted in local communities" },
-    { value: 3000, suffix: "+", label: "youth reached via our programs" },
-];
-
-const coreValues = [
-    { icon: FiTrendingUp, title: "Impact-Driven", description: "Every action we take is aimed at creating measurable, positive environmental change." },
-    { icon: FiUsers, title: "Community-Centric", description: "We believe in the power of the collective and empower local communities to lead the change." },
-    { icon: FiShield, title: "Integrity", description: "We operate with transparency and accountability in all our partnerships and projects." },
-    { icon: FiAward, title: "Innovation", description: "We constantly seek creative and effective solutions to complex environmental challenges." },
-];
-
-
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.2,
+const values = [
+    {
+        title: "Impact First",
+        description: "We measure success by the tangible difference we make in our environment.",
+        icon: FiTrendingUp,
+        color: "bg-emerald-100 text-emerald-600"
     },
-  },
-};
-
-
-const SectionHeader = ({ title, subtitle }) => (
-    <motion.div
-        className="mx-auto max-w-3xl text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-        variants={fadeIn}
-    >
-        <h2 className="text-base font-semibold leading-7 text-emerald-600">{subtitle}</h2>
-        <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            {title}
-        </p>
-    </motion.div>
-);
-
-const AnimatedStat = ({ value, suffix }) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-    const motionValue = useMotionValue(0);
-    const springValue = useSpring(motionValue, { damping: 100, stiffness: 100 });
-
-    useEffect(() => {
-        if (isInView) {
-            motionValue.set(value);
-        }
-    }, [motionValue, isInView, value]);
-
-    useEffect(() => 
-        springValue.on("change", (latest) => {
-            if (ref.current) {
-                ref.current.textContent = `${Intl.NumberFormat('en-US').format(latest.toFixed(0))}${suffix}`;
-            }
-        }), [springValue, suffix]
-    );
-    
-    return <span ref={ref} />;
-};
+    {
+        title: "Community Led",
+        description: "Real change happens when local communities are empowered to lead.",
+        icon: FiUsers,
+        color: "bg-teal-100 text-teal-600"
+    },
+    {
+        title: "Radical Integrity",
+        description: "Transparency and honesty are the bedrock of everything we do.",
+        icon: FiShield,
+        color: "bg-cyan-100 text-cyan-600"
+    },
+    {
+        title: "Bold Innovation",
+        description: "We aren't afraid to try new things to solve old problems.",
+        icon: FiZap,
+        color: "bg-lime-100 text-lime-600"
+    }
+];
 
 
 
-const HeroSection = () => (
-    <div className="relative flex h-screen w-full flex-col items-center justify-center bg-cover bg-fixed bg-center">
-
-
-        <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-10 text-center"
-        >
-            <h1 className="text-5xl font-extrabold text-transparent drop-shadow-xl md:text-8xl bg-clip-text bg-gradient-to-r from-emerald-800 to-gray-800">
-                We Are GreenAura
-            </h1>
-            <p className="mt-4 text-lg font-medium text-gray-700 drop-shadow-lg md:text-2xl">
-                A youth-led movement cultivating a sustainable future, one action at a time.
-            </p>
-        </motion.div>
-        <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-10 z-10"
-        >
-            <FiChevronsDown className="h-8 w-8 text-black/54" />
-        </motion.div>
+const SectionLabel = ({ children, className = "" }) => (
+    <div className={`flex items-center gap-2 mb-6 ${className}`}>
+        <span className="h-px w-8 bg-emerald-500/50"></span>
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-unbounded">
+            {children}
+        </span>
     </div>
 );
 
-const WhoWeAreSection = () => (
-    <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <motion.div 
-                className="grid items-center gap-x-8 gap-y-16 lg:grid-cols-2"
+const Hero = () => {
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+    const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={staggerContainer}
-            >
-                <motion.div variants={fadeIn}>
-                    <h2 className="text-base font-semibold leading-7 text-emerald-600">Our Story</h2>
-                    <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Passion-Fueled, Planet-Focused
-                    </h1>
-                    <p className="mt-6 text-lg leading-8 text-gray-600">
-                        At GreenAura, we believe that protecting the planet starts with everyday action. We're a youth-led environmental initiative working to reduce waste, promote sustainability, and create lasting green impact in our communities.
-                    </p>
-                </motion.div>
-                <motion.div variants={fadeIn} className=" w-full rounded-2xl overflow-hidden ">
-                    <img src="/images/about-us-image.png"  className="h-full w-full object-cover"/>
-              
-                </motion.div>
-            </motion.div>
-        </div>
-    </section>
-);
+    return (
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#fdfcf8]">
 
-const MissionVisionSection = () => (
-    <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader title="Our Purpose" subtitle="Purpose & Vision"/>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <motion.div
+                    style={{ y: y1, x: -50 }}
+                    className="absolute top-0 left-0 w-[800px] h-[800px] bg-emerald-100/60 rounded-full blur-[120px] mix-blend-multiply"
+                />
+                <motion.div
+                    style={{ y: y2, x: 50 }}
+                    className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-teal-100/60 rounded-full blur-[100px] mix-blend-multiply"
+                />
+            </div>
 
-            <motion.div 
-                className="mt-16 grid grid-cols-1 gap-12 text-center md:grid-cols-2 lg:gap-16"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={staggerContainer}
-            >
-              <GlassPanel>
-                    <h3 className="mt-6 text-2xl font-bold text-gray-900">Our Mission</h3>
-                    <p className="mt-4 text-lg text-gray-600">To empower individuals and communities with the tools and knowledge to take meaningful environmental action, fostering a global culture of sustainability.</p>
-                </GlassPanel>
-
-                <GlassPanel>
-    
-                    <h3 className="mt-6 text-2xl font-bold text-gray-900">Our Vision</h3>
-                    <p className="mt-4 text-lg text-gray-600">We envision a world where human progress and environmental stewardship coexist in harmony, ensuring a healthy, thriving planet for generations to come.</p>
-
-                </GlassPanel>
-            </motion.div>
-        </div>
-    </section>
-);
-
-const OurImpactSection = () => (
-    <section className=" py-24 sm:py-32">
-        <motion.div 
-            className="mx-auto max-w-7xl px-6 lg:px-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={staggerContainer}
-        >
-            <motion.div variants={fadeIn} className="mx-auto max-w-2xl lg:mx-0">
-                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Our Impact, By the Numbers</h2>
-                <p className="mt-6 text-lg leading-8 text-emerald-900">
-                    Since our launch, we've been busy. Here's a snapshot of what our community has achieved together. And we're just getting started. 🌟
-                </p>
-            </motion.div>
-            <motion.div 
-                variants={staggerContainer}
-                className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 sm:mt-20 sm:grid-cols-3 lg:mx-0 lg:max-w-none"
-            >
-                {impactStats.map((stat) => (
-                    <motion.div key={stat.label} variants={fadeIn} className="flex flex-col gap-y-3 border-l-4 border-emerald-500 pl-6">
-                        <div className="text-5xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
-                            <AnimatedStat value={stat.value} suffix={stat.suffix} />
-
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="max-w-5xl mx-auto text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                    >
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-50/50 border border-emerald-200 backdrop-blur-sm mb-8">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            <span className="text-xs font-bold tracking-widest text-emerald-800 uppercase">Est. 2024</span>
                         </div>
-                        <div className="text-sm font-medium uppercase tracking-wider text-emerald-900">{stat.label}</div>
+
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 font-unbounded tracking-tight leading-[1.1] mb-8">
+                            Cultivating a <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
+                                Greener Future
+                            </span>
+                        </h1>
+
+                        <p className="text-xl md:text-2xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed mb-12">
+                            We are a collective of dreamers and doers, dedicated to restoring the balance between humanity and nature.
+                        </p>
                     </motion.div>
 
-                ))}
-            </motion.div>
-        </motion.div>
-    </section>
-);
-
-
-const WhatWeDoSection = () => (
-    <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader title="How We Create Change" subtitle="Our Initiatives"/>
-            <motion.dl
-                className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 md:grid-cols-2 lg:max-w-none"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={staggerContainer}
-            >
-                {whatWeDoItems.map((item) => (
-                    <motion.div variants={fadeIn} key={item.title}>
-                        <GlassPanel>
-                            <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-600">
-                                   <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                                </div>
-                                {item.title}
-                            </dt>
-                            <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
-                                <p className="flex-auto">{item.text}</p>
-                            </dd>
-                        </GlassPanel>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                    >
+                        <button className="group relative px-8 py-4 bg-slate-900 text-white rounded-full font-bold overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-emerald-900/20">
+                            <span className="relative z-10 flex items-center gap-2">
+                                Our Mission <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </button>
+                        <button className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-bold hover:bg-slate-50 hover:border-slate-300 transition-all">
+                            Meet the Team
+                        </button>
                     </motion.div>
-                ))}
-            </motion.dl>
-        </div>
-    </section>
-);
+                </div>
+            </div>
 
-
-const OurValuesSection = () => (
-    <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
-            <SectionHeader title="The Principles We Live By" subtitle="Our Core Values" />
 
             <motion.div
-                className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4 lg:gap-8"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={staggerContainer}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             >
-                {coreValues.map((value) => (
-                    <motion.div
-                        key={value.title}
-                        variants={fadeIn}
-                        className="flex flex-col justify-center items-center"
-                    >
-                      <GlassPanel>
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 transition-colors duration-300 group-hover:bg-emerald-600 group-hover:text-white">
-                            <value.icon className="h-7 w-7" />
-                        </div>
-                        <h3 className="mt-6 text-xl font-bold text-gray-900">{value.title}</h3>
-                        <p className="mt-3 text-base text-gray-600">{value.description}</p>
-                        </GlassPanel>
-
-                    </motion.div>
-                ))}
+                <span className="text-[10px] uppercase tracking-widest text-slate-400">Scroll</span>
+                <div className="w-px h-12 bg-gradient-to-b from-slate-300 to-transparent" />
             </motion.div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
-
-const TeamSection = () => (
-    <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SectionHeader title="Meet Our Leaders" subtitle="The Driving Force"/>
-            <motion.ul
-                role="list"
-                className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={staggerContainer}
-            >
-                {teamMembers.map((person) => (
-                    <motion.li key={person.name} variants={fadeIn} className="group text-center">
-                        <div className="relative overflow-hidden rounded-2xl shadow-lg">
-                           <img className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105" src={person.image} alt={person.name} />
-
-
-                           <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/90 to-transparent p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                <p className="text-sm text-gray-200 text-center mb-4">{person.bio}</p>
-                                <div className="flex gap-x-4">
-                                    <a href={person.social.twitter} className="text-gray-300 hover:text-white transition-colors"><FaTwitter className="h-6 w-6" /></a>
-                                    <a href={person.social.linkedin} className="text-gray-300 hover:text-white transition-colors"><FaLinkedin className="h-6 w-6" /></a>
-                                </div>
-                           </div>
+const StorySection = () => {
+    return (
+        <section className="py-32 bg-[#fdfcf8] relative">
+            <div className="container mx-auto px-6">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="relative">
+                        <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl shadow-emerald-900/10 aspect-[4/5]">
+                            <img
+                                src="/images/about-us-image.png"
+                                alt="Our Story"
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                            <div className="absolute bottom-8 left-8 right-8 text-white">
+                                <p className="font-unbounded text-2xl font-bold">"Nature doesn't need us. We need nature."</p>
+                            </div>
                         </div>
 
-                        <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">{person.name}</h3>
-                        <p className="text-base leading-7 text-emerald-600">{person.role}</p>
-                    </motion.li>
-                ))}
-            </motion.ul>
-        </div>
-    </section>
-);
+                        <div className="absolute -top-12 -left-12 w-64 h-64 bg-emerald-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70" />
+                        <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-teal-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70" />
+                    </div>
+
+                    <div>
+                        <SectionLabel>Our Story</SectionLabel>
+                        <h2 className="text-4xl md:text-5xl font-bold font-unbounded text-slate-900 mb-8 leading-tight">
+                            From a Small Seed to a <span className="text-emerald-600">Global Movement</span>
+                        </h2>
+                        <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                            <p>
+                                It started with a simple observation: our local parks were disappearing under layers of neglect. What began as a weekend cleanup crew has blossomed into GreenAura.
+                            </p>
+                            <p>
+                                We believe that environmental stewardship shouldn't be a burden, but a celebration of life. By combining modern technology with ancient wisdom, we're creating a new blueprint for sustainable living.
+                            </p>
+                            <p>
+                                Today, we're not just cleaning up waste; we're cleaning up mindsets. We're empowering a new generation to see themselves not as consumers, but as custodians of this beautiful planet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const StatsSection = () => {
+    return (
+        <section className="py-24 bg-emerald-950 text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-[120px]" />
+            </div>
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8">
+                    {stats.map((stat, index) => (
+                        <div key={index} className="text-center group">
+                            <div className="text-5xl md:text-6xl font-bold font-unbounded mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 group-hover:to-emerald-400 transition-all duration-500">
+                                <AnimatedStat value={stat.value} suffix={stat.suffix} />
+                            </div>
+                            <div className="text-sm font-bold uppercase tracking-widest text-emerald-500/80 group-hover:text-emerald-400 transition-colors">
+                                {stat.label}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const ValuesSection = () => {
+    return (
+        <section className="py-32 bg-stone-50">
+            <div className="container mx-auto px-6">
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <SectionLabel className="justify-center">Our Core Values</SectionLabel>
+                    <h2 className="text-4xl font-bold font-unbounded text-slate-900 mb-6">The Principles That Guide Us</h2>
+                    <p className="text-lg text-slate-600">
+                        We don't just talk about change; we embody it. These values are the compass for every decision we make.
+                    </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {values.map((value, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="bg-[#fdfcf8] p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-xl hover:shadow-emerald-900/5 hover:-translate-y-1 transition-all duration-300"
+                        >
+                            <div className={`w-14 h-14 rounded-2xl ${value.color} flex items-center justify-center mb-6 text-2xl`}>
+                                <value.icon />
+                            </div>
+                            <h3 className="text-xl font-bold font-unbounded text-slate-900 mb-3">{value.title}</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                {value.description}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const TeamSection = () => {
+    return (
+        <section className="py-32 bg-[#fdfcf8] overflow-hidden">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                    <div className="max-w-2xl">
+                        <SectionLabel>Our Team</SectionLabel>
+                        <h2 className="text-4xl md:text-5xl font-bold font-unbounded text-slate-900">
+                            Meet the <span className="text-emerald-600">Visionaries</span>
+                        </h2>
+                    </div>
+                    <a href="#" className="hidden md:flex items-center gap-2 text-emerald-600 font-bold hover:gap-3 transition-all">
+                        View Full Team <FiArrowRight />
+                    </a>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {teamMembers.map((member, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="group relative"
+                        >
+                            <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-slate-100 mb-6 relative">
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                                    <div className="flex gap-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        {member.social.linkedin && (
+                                            <a href={member.social.linkedin} className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-slate-900 transition-colors">
+                                                <FaLinkedin size={20} />
+                                            </a>
+                                        )}
+                                        {member.social.twitter && (
+                                            <a href={member.social.twitter} className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-slate-900 transition-colors">
+                                                <FaTwitter size={20} />
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 className="text-2xl font-bold font-unbounded text-slate-900 mb-1">{member.name}</h3>
+                            <p className="text-emerald-600 font-medium mb-3">{member.role}</p>
+                            <p className="text-slate-500 text-sm leading-relaxed max-w-xs">{member.bio}</p>
+                        </motion.div>
+                    ))}
 
 
-const CTASection = () => (
-    <div className="bg-emerald-500">
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Ready to make a difference?
-          <br />
-          Join our movement today.
-        </h2>
-        <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-          <a
-            href="forms.google.com/t/33324u8232fjeiwfj92"
-            className="rounded-md bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 transition-all duration-300 transform hover:scale-105"
-          >
-            Get Involved
-          </a>
-          <a href="forms.google.com/t/33324u8232fjeiwfj92" className="group text-sm font-semibold leading-6 text-gray-900 transition-colors duration-300 hover:text-emerald-600">
-            Learn more <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
-        </div>
-      </div>
-    </div>
-);
+                    < div className="aspect-[3/4] rounded-3xl bg-stone-50 border-2 border-dashed border-stone-200 flex flex-col items-center justify-center text-center p-8 hover:border-emerald-300 hover:bg-emerald-50/50 transition-all cursor-pointer group" >
+                        <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:scale-110 transition-all mb-6">
+                            <FiUsers size={24} />
+                        </div>
+                        <h3 className="text-xl font-bold font-unbounded text-slate-900 mb-2">Join the Team</h3>
+                        <p className="text-slate-500 mb-6">We are always looking for passionate individuals.</p>
+                        <span className="text-emerald-600 font-bold group-hover:underline">View Openings</span>
+                    </div>
+                </div>
+            </div>
+        </section >
+    );
+};
 
+const CTA = () => {
+    return (
+        <section className="py-32 bg-emerald-900 relative overflow-hidden isolate">
+            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay" />
+
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-emerald-500/30 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/3 w-[800px] h-[800px] bg-teal-500/30 rounded-full blur-[120px]" />
+
+            <div className="container mx-auto px-6 relative z-10 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-3xl mx-auto"
+                >
+                    <h2 className="text-4xl md:text-6xl font-bold font-unbounded text-white mb-8 leading-tight">
+                        Ready to Plant Your <br />
+                        <span className="text-emerald-300">Legacy?</span>
+                    </h2>
+                    <p className="text-xl text-emerald-100/80 mb-12 leading-relaxed">
+                        The best time to plant a tree was 20 years ago. The second best time is now. Join us in shaping a greener tomorrow.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="https://forms.google.com/t/33324u8232fjeiwfj92"
+                            className="px-10 py-5 bg-white text-emerald-950 rounded-full font-bold text-lg hover:bg-emerald-50 transition-all hover:scale-105 shadow-xl shadow-emerald-900/20"
+                        >
+                            Get Involved Now
+                        </a>
+                        <a
+                            href="#"
+                            className="px-10 py-5 bg-transparent border border-emerald-400/30 text-white rounded-full font-bold text-lg hover:bg-emerald-800/30 transition-all"
+                        >
+                            Donate
+                        </a>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+};
 
 export default function PremiumAboutPage() {
-  return (
-    <main className="">
-       <Background />
-
-      <HeroSection />
-
-      <WhoWeAreSection />
-      <MissionVisionSection />
-      <OurImpactSection />
-      <WhatWeDoSection />
-      <OurValuesSection />
-      <TeamSection />
-      <CTASection />
-    </main>
-  );
+    return (
+        <main className="bg-[#fdfcf8] selection:bg-emerald-200 selection:text-emerald-900">
+            <Background />
+            <Hero />
+            <StorySection />
+            <StatsSection />
+            <ValuesSection />
+            <TeamSection />
+            <CTA />
+        </main>
+    );
 }

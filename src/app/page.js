@@ -1,6 +1,6 @@
 import HeroSection from "@/components/home/Hero";
 
-import PartneredByCarousel  from "@/components/Carousel";
+import PartneredByCarousel from "@/components/Carousel";
 import { LOGOS } from "@/lib/partners-logos";
 
 import AboutUsSection from "@/components/home/About";
@@ -24,8 +24,8 @@ export default async function Home() {
 
   return (
     <SmoothScroll >
-    <HeroSection/>
-    <div className="bg-gradient-to-b from-green-50 to-lime-100/80 py-12 h-76 flex flex-col justify-between items-center">
+      <HeroSection />
+      <div className="bg-gradient-to-b from-green-50 to-lime-100/80 py-12 h-76 flex flex-col justify-between items-center">
         <h1 className="mt-4 mb-8 text-4xl font-bold text-white md:text-6xl flex justify-center items-center">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-lime-500">
             Trusted by the Best
@@ -33,19 +33,19 @@ export default async function Home() {
         </h1>
 
 
-      <div className="flex flex-col gap-8">
-        <PartneredByCarousel logos={LOGOS} speed="fast" direction="left" />
+        <div className="flex flex-col gap-8">
+          <PartneredByCarousel logos={LOGOS} speed="fast" direction="left" />
+        </div>
       </div>
-  </div>
-    <AboutUsSection/>
-    <ActivitiesSection/>
-    <BlogSection posts={latestPosts} />
+      <AboutUsSection />
+      <ActivitiesSection />
+      <BlogSection posts={latestPosts} />
 
-    <JoinUsSection/>
-    <FAQSection/>
+      <JoinUsSection />
+      <FAQSection />
 
-    <ContactUsSection/>
-    
+      <ContactUsSection />
+
 
     </SmoothScroll>
   );

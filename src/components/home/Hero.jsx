@@ -15,15 +15,15 @@ function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
 
         <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-10 lg:p-16">
-          
+
           <div className="max-w-7xl mx-auto w-full">
-            <h1 
+            <h1
               className="font-extrabold text-[#fdfcf9] text-4xl sm:text-5xl lg:text-7xl leading-tight lg:leading-snug drop-shadow-xl"
-              style={{ fontFamily: 'var(--font-unbounded)' }} 
+              style={{ fontFamily: 'var(--font-unbounded)' }}
             >
               {headlineWords.map((word, index) => (
                 <span key={index} className="inline-block">
-                  <span 
+                  <span
                     className="inline-block animate-fadeInUp"
                     style={{ animationDelay: `${index * 120}ms` }}
                   >
@@ -41,8 +41,8 @@ function HeroSection() {
             </h1>
 
             <div className="mt-8 flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-              
-              <p 
+
+              <p
                 className="text-gray-200 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl animate-fadeInUp"
                 style={{ animationDelay: '900ms' }}
               >
@@ -50,7 +50,7 @@ function HeroSection() {
                 solutions for a sustainable future.
               </p>
 
-              <div 
+              <div
                 className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0 w-full sm:w-auto animate-fadeInUp"
                 style={{ animationDelay: '1100ms' }}
               >
@@ -69,7 +69,7 @@ function HeroSection() {
               </div>
             </div>
           </div>
-          
+
           <ScrollLink
             to="about-us"
             smooth={true}

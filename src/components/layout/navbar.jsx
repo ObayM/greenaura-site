@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link as ScrollLink } from 'react-scroll';
 import NLink from 'next/link';
-import { usePathname } from 'next/navigation'; 
+import { usePathname } from 'next/navigation';
 import { FaCode, FaBars, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 
@@ -158,7 +158,7 @@ const Navbar = () => {
                 const isPageLink = link.to.startsWith('/');
                 const mobileLinkClass =
                   'text-slate-200 hover:text-cyan-400 transition-colors duration-300 font-medium cursor-pointer text-2xl';
-                
+
                 if (isPageLink) {
                   return (
                     <motion.div key={link.to} variants={mobileLinkVariants}>
@@ -204,7 +204,7 @@ const Navbar = () => {
                   className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-10 py-4 rounded-full mt-6 text-lg"
                   onClick={closeMenu}
                 >
-                <a href="#" target="_blank">Donate</a>
+                  <a href="#" target="_blank">Donate</a>
                 </motion.button>
               </motion.div>
             </motion.div>

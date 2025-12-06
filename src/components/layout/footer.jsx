@@ -36,7 +36,7 @@ const Footer = () => {
     return (
         <footer className="relative bg-[#0A1A12] text-white pt-20 overflow-hidden">
 
-            
+
             <motion.div
                 className="container mx-auto px-8 py-16 relative z-10"
                 variants={containerVariants}
@@ -45,7 +45,7 @@ const Footer = () => {
                 viewport={{ once: true, amount: 0.2 }}
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    
+
                     <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-1">
                         <Link href="/" className="flex items-center gap-3 mb-4">
                             <Image src="/logo.png" alt="GreenAura Logo" width={40} height={40} />
@@ -79,7 +79,7 @@ const Footer = () => {
                         </ul>
                     </motion.div>
 
-                     <motion.div variants={itemVariants}>
+                    <motion.div variants={itemVariants}>
                         <h3 className="font-semibold mb-4 tracking-wider uppercase text-lime-400">About</h3>
                         <ul className="space-y-3">
                             <li><Link href="/" className="text-green-200/70 hover:text-white transition-colors">Our Story</Link></li>
@@ -89,9 +89,9 @@ const Footer = () => {
                     </motion.div>
 
                     <motion.div variants={itemVariants}>
-                         <h3 className="font-semibold mb-4 tracking-wider uppercase text-lime-400">Join our newsletter</h3>
-                         <p className="text-green-200/70 text-sm mb-4">Get the latest updates on our programs and climate news.</p>
-                         <form className="flex">
+                        <h3 className="font-semibold mb-4 tracking-wider uppercase text-lime-400">Join our newsletter</h3>
+                        <p className="text-green-200/70 text-sm mb-4">Get the latest updates on our programs and climate news.</p>
+                        <form className="flex">
                             <input
                                 type="email"
                                 placeholder="your.email@example.com"
@@ -106,7 +106,7 @@ const Footer = () => {
                             >
                                 <FiSend />
                             </motion.button>
-                         </form>
+                        </form>
                     </motion.div>
                 </div>
 
