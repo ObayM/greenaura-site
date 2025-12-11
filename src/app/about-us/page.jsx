@@ -12,6 +12,7 @@ import {
     FiZap,
     FiArrowRight,
     FiTrendingUp,
+    FiShield,
 } from "react-icons/fi";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import Background from "@/components/layout/background";
