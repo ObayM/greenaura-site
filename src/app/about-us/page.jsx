@@ -169,7 +169,7 @@ const Hero = () => {
 
 const StorySection = () => {
     return (
-        <section className="py-32 bg-[#fdfcf8] relative">
+        <section className="py-32 bg-[#fdfcf8] relative overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                     <div className="relative">
